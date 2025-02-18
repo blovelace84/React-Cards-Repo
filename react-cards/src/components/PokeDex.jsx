@@ -5,8 +5,8 @@ import PokemonCard from "./PokemonCard";
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
-function PokeDex() {
-  const [pokemon, addPokemon] = useAxios(BASE_URL);
+const PokeDex = () => {
+  const [pokemon, addPokemon, clearPokemon] = useAxios(BASE_URL);
   const [query, setQuery] = useState("");
 
   const handleAddPokemon = () => {
