@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import useAxios from "../hooks/useAxios";
 import PokemonCard from "./PokemonCard";
+import './PokeDex.css';
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -20,12 +21,14 @@ const PokeDex = () => {
     <div className="PokeDex">
       <h3>Search for a Pokémon</h3>
       <input
+        className="PokeDex-input"
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter Pokémon name"
       />
       <button onClick={handleAddPokemon}>Add Pokémon</button>
+      <button onClick={clearPokemon}>Clear all Pokémon</button>
       <div className="PokeDex-list">
         {pokemon.map((p, index) => (
           <PokemonCard
