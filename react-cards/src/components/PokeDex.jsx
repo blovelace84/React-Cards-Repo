@@ -1,42 +1,29 @@
 // src/PokeDex.js
-import React, { useState } from "react";
+import React from "react";
 import useAxios from "../hooks/useAxios";
 import PokemonCard from "./PokemonCard";
+import {formatPokemon} from "../helpers/formatters";
 import './PokeDex.css';
 
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
-
-const PokeDex = () => {
-  const [pokemon, addPokemon, clearPokemon] = useAxios(BASE_URL);
-  const [query, setQuery] = useState("");
-
-  const handleAddPokemon = () => {
-    if (query.trim()) {
-      addPokemon(query.toLowerCase()); // Fetch Pokémon by name
-      setQuery(""); // Clear input after adding
-    }
-  };
+function PokeDex() {
+  const [pokemon, fetchPokemon, clearPokemon] = useAxios(
+    "https://pokeapi.co/api/v2/pokemon/",
+    formatPokemon
+  );
 
   return (
     <div className="PokeDex">
-      <h3>Search for a Pokémon</h3>
-      <input
-        className="PokeDex-input"
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Enter Pokémon name"
-      />
-      <button onClick={handleAddPokemon}>Add Pokémon</button>
-      <button onClick={clearPokemon}>Clear all Pokémon</button>
-      <div className="PokeDex-list">
-        {pokemon.map((p, index) => (
-          <PokemonCard
-            key={index}
-            name={p.name}
-            imageFront={p.sprites.front_default}
-            imageBack={p.sprites.back_default}
-          />
+      <h1>PokeDex</h1>
+      <button onClick={() => fetchPokemon("?limit=10", true)}>Fetch All Pokémon</button>
+      <button onClick={clearPokemon}>Clear All</button>
+
+      <div>
+        {pokemon.map(p => (
+          <div key={p.id}>
+            <h3>{p.name}</h3>
+            <img src={p.front} alt={p.name} />
+            <img src={p.back} alt={p.name} />
+          </div>
         ))}
       </div>
     </div>

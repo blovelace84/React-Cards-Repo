@@ -2,26 +2,20 @@
 import React from "react";
 import useAxios from "../hooks/useAxios";
 import PlayingCard from "./PlayingCard";
+import {  formatPlayingCard, formatPokemon } from "../helpers/formatters";
 import "./PlayingCardList.css";
 
-
-const BASE_URL = "https://deckofcardsapi.com/api/deck/new/draw/";
-
-function PlayingCardList() {
-  const [cards, addCard, clearCards] = useAxios(BASE_URL);
+const PlayingCardList = () => {
+  const [cards, addCard, clearCards] = useAxios("", formatPokemon);
 
   return (
     <div className="PlayingCardList">
       <h3>Pick a card!</h3>
-      <button onClick={() => addCard()}>Add a playing card</button>
+      <button onClick={addCard}>Add a playing card</button>
       <button onClick={clearCards}>Clear all cards</button>
-      <div className="PlayingCardList-card-area">
-        {cards.map((cardData, index) => (
-          <PlayingCard
-            key={index}
-            frontImage={cardData.cards[0].image}
-            backImage="https://via.placeholder.com/150" // Placeholder for back image
-          />
+      <div className="card-container">
+        {cards.map(card => (
+          <PlayingCard key={card.id} frontImage={card.image} />
         ))}
       </div>
     </div>
