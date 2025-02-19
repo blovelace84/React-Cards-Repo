@@ -17,7 +17,7 @@ function PlayingCardList() {
               <PlayingCard
                 key={index}
                 frontImage={card.cards[0].image}
-                backImage="/card-back.png"
+                backImage="cards/src/assets/back.png"
               />
             ) : (
               <p key={index}>Card data not available</p>

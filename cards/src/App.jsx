@@ -1,5 +1,6 @@
 import React from "react"
 import PlayingCardList from "./PlayingCardList"
+import PokeDex from "./PokeDex";
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <h1>Pick a Card:</h1>
       <PlayingCardList />
+      <PokeDex />
     </div>
   )
 }
